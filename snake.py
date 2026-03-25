@@ -2,10 +2,7 @@ import pygame
 
 from pygame.math import Vector2
 
-from constants import (
-    CELL_SIZE,
-    LIGHT_SKY_BLUE,
-)
+from constants import CELL_SIZE
 
 class Snake:
     def __init__(self, head_up, head_down, head_left, head_right,
@@ -70,7 +67,7 @@ class Snake:
                         screen.blit(self.body_bottom_right, block_rect)
                 
 
-    def move(self):
+    def slither(self):
         new_body = self.body[:-1]
         new_body.insert(0, self.body[0] + self.direction)
         self.body = new_body

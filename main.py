@@ -5,7 +5,6 @@ from game import Game
 from pygame.math import Vector2
 
 from constants import (
-    LIME,
     WIDTH,
     HEIGHT,
 )
@@ -48,8 +47,8 @@ def main():
 
     game = Game(apple, head_up, head_down, head_left, head_right,
                 tail_up, tail_down, tail_left, tail_right,
-                body_vertical, body_horizontal, body_bottom_left, body_bottom_right,
-                body_top_left, body_top_right)
+                body_vertical, body_horizontal, body_bottom_left,
+                body_bottom_right, body_top_left, body_top_right)
 
     while True:
         for event in pygame.event.get():

@@ -16,7 +16,14 @@ class Fruit:
 
 
     def draw(self, screen):
-        screen.blit(self.apple, self.position * CELL_SIZE)
+        fruit = pygame.Rect(
+            int(self.position.x * CELL_SIZE),
+            int(self.position.y * CELL_SIZE),
+            CELL_SIZE,
+            CELL_SIZE,
+        )
+
+        screen.blit(self.apple, fruit)
 
 
     def randomize(self):
