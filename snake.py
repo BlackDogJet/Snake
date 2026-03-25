@@ -3,26 +3,26 @@ import pygame
 from pygame.math import Vector2
 
 from constants import (
-    Colors,
-    Screen,
+    CELL_SIZE,
+    LIGHT_SKY_BLUE,
 )
 
 class Snake:
     def __init__(self):
-        self.body = [Vector2(5, 10), Vector2(6, 10), Vector2(7, 10)]
+        self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(1, 0)
 
 
     def draw(self, screen):
         for block in self.body:
             snake = pygame.Rect(
-                int(block.x * Screen.CELL_SIZE.value),
-                int(block.y * Screen.CELL_SIZE.value),
-                int(Screen.CELL_SIZE.value),
-                int(Screen.CELL_SIZE.value)
+                int(block.x * CELL_SIZE),
+                int(block.y * CELL_SIZE),
+                int(CELL_SIZE),
+                int(CELL_SIZE)
             )
 
-            pygame.draw.rect(screen, Colors.LIGHT_SKY_BLUE.value, snake)
+            pygame.draw.rect(screen, LIGHT_SKY_BLUE, snake)
 
     
     def move(self):

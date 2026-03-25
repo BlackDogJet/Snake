@@ -1,11 +1,14 @@
+from turtle import Screen
+
 import pygame
 import random
 
 from pygame.math import Vector2
 
 from constants import (
-    Screen,
-    Colors
+    RED,
+    CELL_SIZE,
+    CELL_NUMBER,
 )
 
 
@@ -13,18 +16,19 @@ class Fruit:
     def __init__(self):
         self.randomize()
 
+
     def draw(self, screen):
         fruit = pygame.Rect(
-            int(self.position.x * Screen.CELL_SIZE.value),
-            int(self.position.y * Screen.CELL_SIZE.value),
-            int(Screen.CELL_SIZE.value),
-            int(Screen.CELL_SIZE.value)
+            int(self.position.x * CELL_SIZE),
+            int(self.position.y * CELL_SIZE),
+            int(CELL_SIZE),
+            int(CELL_SIZE)
         )
 
-        pygame.draw.rect(screen, Colors.RED.value, fruit)
+        pygame.draw.rect(screen, RED, fruit)
 
 
     def randomize(self):
-        self.x = random.randint(0, Screen.CELL_NUMBER.value - 1)
-        self.y = random.randint(0, Screen.CELL_NUMBER.value - 1)
+        self.x = random.randint(0, CELL_NUMBER - 1)
+        self.y = random.randint(0, CELL_NUMBER - 1)
         self.position = Vector2(self.x, self.y)
