@@ -2,6 +2,8 @@ import sys
 import pygame
 
 from fruit import Fruit
+from snake import Snake
+from pygame.math import Vector2
 
 from constants import (
     Screen,
@@ -9,37 +11,45 @@ from constants import (
     Colors,
 )
 
-pygame.init()
 
-x_position = Surface.X.value
-y_position = Surface.Y.value
-x_velocity = 5
-y_velocity = 5
+def main():
+    pygame.init()
 
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((Screen.WIDTH.value, Screen.HEIGHT.value))
-test_surface = pygame.Surface((Surface.WIDTH.value, Surface.HEIGHT.value))
-test_surface.fill(Colors.LIGHT_SKY_BLUE.value)
+    SCREEN_UPDATE = pygame.USEREVENT
+    pygame.time.set_timer(SCREEN_UPDATE, 150)
 
-fruit = Fruit()
+    clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((Screen.WIDTH.value, Screen.HEIGHT.value))
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    fruit = Fruit()
+    snake = Snake()
 
-    x_position += x_velocity
-    y_position += y_velocity
-    
-    if x_position + Surface.WIDTH.value > Screen.WIDTH.value or x_position < 0:
-        x_velocity = -x_velocity
-    
-    if y_position + Surface.HEIGHT.value > Screen.HEIGHT.value or y_position < 0:
-        y_velocity = -y_velocity
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-    screen.fill(Colors.LIME.value)
-    screen.blit(test_surface, (x_position, y_position))
-    fruit.draw(screen)
-    pygame.display.update()
-    clock.tick(60)
+            if event.type == SCREEN_UPDATE:
+                snake.move()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP or event.key == pygame.K_w:
+                    snake.direction = Vector2(0, -1)
+                elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                    snake.direction = Vector2(0, 1)
+                elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                    snake.direction = Vector2(-1, 0)
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                    snake.direction = Vector2(1, 0)
+
+        screen.fill(Colors.LIME.value)
+        fruit.draw(screen)
+        snake.draw(screen)
+
+        pygame.display.update()
+        clock.tick(60)
+
+
+if __name__ == "__main__":
+    main()        
