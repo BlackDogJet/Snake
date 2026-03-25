@@ -2,8 +2,10 @@ from enum import Enum
 
 
 class Screen(Enum):
-    WIDTH = 600
-    HEIGHT = 800
+    CELL_SIZE = 40
+    CELL_NUMBER = 20
+    WIDTH = CELL_SIZE * CELL_NUMBER
+    HEIGHT = CELL_SIZE * CELL_NUMBER
 
 
 class Surface(Enum):

@@ -1,6 +1,8 @@
 import sys
 import pygame
 
+from fruit import Fruit
+
 from constants import (
     Screen,
     Surface,
@@ -14,17 +16,19 @@ y_position = Surface.Y.value
 x_velocity = 5
 y_velocity = 5
 
-screen = pygame.display.set_mode((Screen.WIDTH.value, Screen.HEIGHT.value))
 clock = pygame.time.Clock()
+screen = pygame.display.set_mode((Screen.WIDTH.value, Screen.HEIGHT.value))
 test_surface = pygame.Surface((Surface.WIDTH.value, Surface.HEIGHT.value))
 test_surface.fill(Colors.LIGHT_SKY_BLUE.value)
+
+fruit = Fruit()
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-            
+
     x_position += x_velocity
     y_position += y_velocity
     
@@ -36,5 +40,6 @@ while True:
 
     screen.fill(Colors.LIME.value)
     screen.blit(test_surface, (x_position, y_position))
+    fruit.draw(screen)
     pygame.display.update()
     clock.tick(60)
