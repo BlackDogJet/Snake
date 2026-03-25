@@ -6,8 +6,16 @@ from snake import Snake
 from constants import CELL_NUMBER
 
 class Game:
-    def __init__(self, apple):
-        self.snake = Snake()
+    def __init__(self, apple, head_up, head_down, head_left, head_right,
+                 tail_up, tail_down, tail_left, tail_right,
+                 body_vertical, body_horizontal, body_left, body_right,
+                 body_tail_left, body_tail_right):
+        
+        self.snake = Snake(head_up, head_down, head_left, head_right,
+                           tail_up, tail_down, tail_left, tail_right,
+                           body_vertical, body_horizontal, body_left, body_right,
+                           body_tail_left, body_tail_right)
+        
         self.fruit = Fruit(apple)
 
 
