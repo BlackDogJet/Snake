@@ -1,31 +1,22 @@
-from turtle import Screen
-
 import pygame
 import random
 
 from pygame.math import Vector2
 
 from constants import (
-    RED,
     CELL_SIZE,
     CELL_NUMBER,
 )
 
 
 class Fruit:
-    def __init__(self):
+    def __init__(self, apple):
+        self.apple = apple
         self.randomize()
 
 
     def draw(self, screen):
-        fruit = pygame.Rect(
-            int(self.position.x * CELL_SIZE),
-            int(self.position.y * CELL_SIZE),
-            int(CELL_SIZE),
-            int(CELL_SIZE)
-        )
-
-        pygame.draw.rect(screen, RED, fruit)
+        screen.blit(self.apple, self.position * CELL_SIZE)
 
 
     def randomize(self):

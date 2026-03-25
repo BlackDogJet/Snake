@@ -6,9 +6,9 @@ from snake import Snake
 from constants import CELL_NUMBER
 
 class Game:
-    def __init__(self):
+    def __init__(self, apple):
         self.snake = Snake()
-        self.fruit = Fruit()
+        self.fruit = Fruit(apple)
 
 
     def update(self):

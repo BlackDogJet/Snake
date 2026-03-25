@@ -19,8 +19,9 @@ def main():
 
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    apple = pygame.image.load("graphics/apple.png").convert_alpha()
 
-    game = Game()
+    game = Game(apple)
 
     while True:
         for event in pygame.event.get():
