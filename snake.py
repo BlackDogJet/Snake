@@ -29,3 +29,8 @@ class Snake:
         new_body = self.body[:-1]
         new_body.insert(0, self.body[0] + self.direction)
         self.body = new_body
+
+
+    def grow(self):
+        tail = self.body[-1]
+        self.body.append(tail)

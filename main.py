@@ -1,13 +1,11 @@
 import sys
 import pygame
 
-from fruit import Fruit
-from snake import Snake
+from game import Game
 from pygame.math import Vector2
 
 from constants import (
     Screen,
-    Surface,
     Colors,
 )
 
@@ -21,8 +19,7 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((Screen.WIDTH.value, Screen.HEIGHT.value))
 
-    fruit = Fruit()
-    snake = Snake()
+    game = Game()
 
     while True:
         for event in pygame.event.get():
@@ -31,21 +28,20 @@ def main():
                 sys.exit()
 
             if event.type == SCREEN_UPDATE:
-                snake.move()
+                game.update()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
-                    snake.direction = Vector2(0, -1)
+                    game.snake.direction = Vector2(0, -1)
                 elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                    snake.direction = Vector2(0, 1)
+                    game.snake.direction = Vector2(0, 1)
                 elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    snake.direction = Vector2(-1, 0)
+                    game.snake.direction = Vector2(-1, 0)
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    snake.direction = Vector2(1, 0)
+                    game.snake.direction = Vector2(1, 0)
 
         screen.fill(Colors.LIME.value)
-        fruit.draw(screen)
-        snake.draw(screen)
+        game.draw(screen)
 
         pygame.display.update()
         clock.tick(60)

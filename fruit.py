@@ -11,10 +11,7 @@ from constants import (
 
 class Fruit:
     def __init__(self):
-        self.x = random.randint(0, Screen.CELL_NUMBER.value - 1)
-        self.y = random.randint(0, Screen.CELL_NUMBER.value - 1)
-        self.position = Vector2(self.x, self.y)
-
+        self.randomize()
 
     def draw(self, screen):
         fruit = pygame.Rect(
@@ -25,3 +22,9 @@ class Fruit:
         )
 
         pygame.draw.rect(screen, Colors.RED.value, fruit)
+
+
+    def randomize(self):
+        self.x = random.randint(0, Screen.CELL_NUMBER.value - 1)
+        self.y = random.randint(0, Screen.CELL_NUMBER.value - 1)
+        self.position = Vector2(self.x, self.y)
