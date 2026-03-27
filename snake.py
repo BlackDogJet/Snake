@@ -2,7 +2,10 @@ import pygame
 
 from pygame.math import Vector2
 
-from constants import CELL_SIZE
+from constants import (
+    OFFSET,
+    CELL_SIZE,
+)
 
 class Snake:
     def __init__(self, head_up, head_down, head_left, head_right,
@@ -36,8 +39,8 @@ class Snake:
         self.update_tail_graphic()
 
         for index, block in enumerate(self.body):
-            x_pos = int(block.x * CELL_SIZE)
-            y_pos = int(block.y * CELL_SIZE)
+            x_pos = int(block.x * CELL_SIZE) + OFFSET
+            y_pos = int(block.y * CELL_SIZE) + OFFSET
             block_rect = pygame.Rect(x_pos, y_pos, CELL_SIZE, CELL_SIZE)
 
             if index == 0:

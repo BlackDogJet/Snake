@@ -5,6 +5,11 @@ from game import Game
 from pygame.math import Vector2
 
 from constants import (
+    CELL_NUMBER,
+    CELL_SIZE,
+    GRASS,
+    OFFSET,
+    WHITE,
     WIDTH,
     HEIGHT,
 )
@@ -13,11 +18,26 @@ from constants import (
 def main():
     pygame.init()
 
+    # Event for updating the screen
     SCREEN_UPDATE = pygame.USEREVENT
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+    # Caption
+    pygame.display.set_caption("Snake Game")
+
+    # Game Icon
+    icon = pygame.image.load("graphics/game.ico")
+    pygame.display.set_icon(icon)
+
+    # Font
+    font = pygame.font.Font("fonts/BitcountPropDouble.ttf", 32)
+
+    # Sounds
+    crash_sound = pygame.mixer.Sound("sounds/crash.mp3")
+    eat_sound = pygame.mixer.Sound("sounds/eat.mp3")
 
     # Background graphics
     background = pygame.image.load("graphics/background.png").convert_alpha()
@@ -45,7 +65,8 @@ def main():
     body_top_left = pygame.image.load("graphics/body_top_left.png").convert_alpha()
     body_top_right = pygame.image.load("graphics/body_top_right.png").convert_alpha()
 
-    game = Game(apple, head_up, head_down, head_left, head_right,
+    game = Game(font, crash_sound, eat_sound, apple,
+                head_up, head_down, head_left, head_right,
                 tail_up, tail_down, tail_left, tail_right,
                 body_vertical, body_horizontal, body_bottom_left,
                 body_bottom_right, body_top_left, body_top_right)
@@ -57,7 +78,7 @@ def main():
                 sys.exit()
 
             if event.type == SCREEN_UPDATE:
-                game.update()
+                game.update(screen)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
@@ -74,7 +95,24 @@ def main():
                         game.snake.direction = Vector2(1, 0)
 
         screen.blit(background, (0, 0))
+
+        # Border
+        border_rect = pygame.Rect(
+            OFFSET - 10,
+            OFFSET - 10,
+            CELL_SIZE * CELL_NUMBER + 20,
+            CELL_SIZE * CELL_NUMBER + 20,
+        )
+
+        pygame.draw.rect(screen, GRASS, border_rect, 10)
+
         game.draw(screen)
+
+        # Title
+        title_text = font.render("Snake Game", True, WHITE)
+        title_rect = title_text.get_rect(left=OFFSET, top=30)
+
+        screen.blit(title_text, title_rect)
 
         pygame.display.update()
         clock.tick(60)

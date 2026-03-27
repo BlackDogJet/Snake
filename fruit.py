@@ -4,6 +4,7 @@ import random
 from pygame.math import Vector2
 
 from constants import (
+    OFFSET,
     CELL_SIZE,
     CELL_NUMBER,
 )
@@ -16,9 +17,11 @@ class Fruit:
 
 
     def draw(self, screen):
+        x_pos = int(self.position.x * CELL_SIZE) + OFFSET
+        y_pos = int(self.position.y * CELL_SIZE) + OFFSET
         fruit = pygame.Rect(
-            int(self.position.x * CELL_SIZE),
-            int(self.position.y * CELL_SIZE),
+            x_pos,
+            y_pos,
             CELL_SIZE,
             CELL_SIZE,
         )
