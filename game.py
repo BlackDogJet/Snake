@@ -7,12 +7,12 @@ from snake import Snake
 
 from constants import (
     GRASS,
-    SAVE_PATH,
     WHITE,
-    OFFSET,
     WIDTH,
     HEIGHT,
+    OFFSET,
     CELL_SIZE,
+    SAVE_PATH,
     CELL_NUMBER,
 )
 
@@ -97,7 +97,7 @@ class Game:
         # Score text
         score_text = self.get_score()
         score_surface = self.font.render("Score: " + str(score_text), True, WHITE)
-        score_rect = score_surface.get_rect(right=WIDTH - OFFSET, top=OFFSET - 40)
+        score_rect = score_surface.get_rect(right=WIDTH - OFFSET, top=10)
 
         # Position the apple to the left of the score
         apple_rect = self.fruit.apple.get_rect()

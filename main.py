@@ -7,14 +7,14 @@ from game import Game
 from pygame.math import Vector2
 
 from constants import (
-    CELL_NUMBER,
-    CELL_SIZE,
     GRASS,
-    OFFSET,
-    SAVE_PATH,
     WHITE,
     WIDTH,
     HEIGHT,
+    OFFSET,
+    CELL_SIZE,
+    SAVE_PATH,
+    CELL_NUMBER,
 )
 
 
@@ -127,9 +127,14 @@ def main():
 
         # Title
         title_text = font.render("Snake Game", True, WHITE)
-        title_rect = title_text.get_rect(left=OFFSET, top=30)
+        title_rect = title_text.get_rect(left=OFFSET, top=OFFSET - 40)
+        title_rect.topleft = (OFFSET, 10)
+
+        high_score_text = font.render("High Score: " + str(game.high_score), True, WHITE)
+        high_score_rect = high_score_text.get_rect(center=(WIDTH // 2, 30))
 
         screen.blit(title_text, title_rect)
+        screen.blit(high_score_text, high_score_rect)
 
         pygame.display.update()
         clock.tick(60)
