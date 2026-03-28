@@ -1,3 +1,5 @@
+import json
+import os
 import sys
 import pygame
 
@@ -9,6 +11,7 @@ from constants import (
     CELL_SIZE,
     GRASS,
     OFFSET,
+    SAVE_PATH,
     WHITE,
     WIDTH,
     HEIGHT,
@@ -16,6 +19,10 @@ from constants import (
 
 
 def main():
+    # Sound settings
+    pygame.mixer.pre_init(44100, -16, 1, 512)
+
+    # Initialize Pygame
     pygame.init()
 
     # Event for updating the screen
@@ -38,6 +45,16 @@ def main():
     # Sounds
     crash_sound = pygame.mixer.Sound("sounds/crash.mp3")
     eat_sound = pygame.mixer.Sound("sounds/eat.mp3")
+
+    # High Score
+    high_score = 0
+    if not os.path.exists(SAVE_PATH):
+        with open(SAVE_PATH, "w") as file:
+            json.dump({"high_score": 0}, file)
+    else:
+        with open(SAVE_PATH, "r") as file:
+            data = json.load(file)
+            high_score = data["high_score"]
 
     # Background graphics
     background = pygame.image.load("graphics/background.png").convert_alpha()
@@ -65,7 +82,7 @@ def main():
     body_top_left = pygame.image.load("graphics/body_top_left.png").convert_alpha()
     body_top_right = pygame.image.load("graphics/body_top_right.png").convert_alpha()
 
-    game = Game(font, crash_sound, eat_sound, apple,
+    game = Game(font, crash_sound, eat_sound, high_score, apple,
                 head_up, head_down, head_left, head_right,
                 tail_up, tail_down, tail_left, tail_right,
                 body_vertical, body_horizontal, body_bottom_left,

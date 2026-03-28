@@ -1,3 +1,4 @@
+import json
 import sys
 import pygame
 
@@ -6,6 +7,7 @@ from snake import Snake
 
 from constants import (
     GRASS,
+    SAVE_PATH,
     WHITE,
     OFFSET,
     WIDTH,
@@ -15,7 +17,7 @@ from constants import (
 )
 
 class Game:
-    def __init__(self, font, crash_sound, eat_sound, apple,
+    def __init__(self, font, crash_sound, eat_sound, high_score, apple,
                  head_up, head_down, head_left, head_right,
                  tail_up, tail_down, tail_left, tail_right,
                  body_vertical, body_horizontal, body_left,
@@ -24,7 +26,8 @@ class Game:
         self.font = font
         self.eat_sound = eat_sound
         self.crash_sound = crash_sound
-        
+        self.high_score = high_score
+
         self.snake = Snake(head_up, head_down, head_left, head_right,
                            tail_up, tail_down, tail_left, tail_right,
                            body_vertical, body_horizontal, body_left,
@@ -91,9 +94,9 @@ class Game:
 
 
     def score(self, screen):
-        # Score is the length of the snake's body minus the initial length (3)
-        score_text = str(len(self.snake.body) - 3)
-        score_surface = self.font.render("Score: " + score_text, True, WHITE)
+        # Score text
+        score_text = self.get_score()
+        score_surface = self.font.render("Score: " + str(score_text), True, WHITE)
         score_rect = score_surface.get_rect(right=WIDTH - OFFSET, top=OFFSET - 40)
 
         # Position the apple to the left of the score
@@ -108,10 +111,37 @@ class Game:
     def game_over(self, screen):
         game_over_text = self.font.render("Game Over", True, WHITE)
         game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+
+        score_text = self.get_score()
+        if self.update_high_score():
+            score_surface = self.font.render("New High Score! " + str(score_text), True, WHITE)
+            score_rect = score_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 50))
+        else:
+            score_surface = self.font.render("Final Score: " + str(score_text), True, WHITE)
+            score_rect = score_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 50))
+
         screen.blit(game_over_text, game_over_rect)
+        screen.blit(score_surface, score_rect)
+
         pygame.display.update()
         pygame.time.delay(2000)
 
         # Quit the game
         pygame.quit()
         sys.exit()
+
+    
+    def get_score(self):
+        # Score is the length of the snake's body minus the initial length (3)
+        return len(self.snake.body) - 3
+    
+
+    def update_high_score(self):
+        current_score = self.get_score()
+        if current_score > self.high_score:
+            self.high_score = current_score
+            with open(SAVE_PATH, "w") as file:
+                json.dump({"high_score": self.high_score}, file)
+            return True
+        
+        return False

@@ -8,3 +8,6 @@ HEIGHT = CELL_SIZE * CELL_NUMBER + 2 * OFFSET
 # Colors
 GRASS = (1, 46, 11)
 WHITE = (255, 255, 255)
+
+# Game Save
+SAVE_PATH = "./" + "save.json"
