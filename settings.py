@@ -24,6 +24,8 @@ class Settings:
                 self.difficulty = data.get("difficulty", DIFFICULTY_DEFAULT)
                 self.snake_color = data.get("snake_color", SNAKE_COLOR_DEFAULT)
                 self.high_score = data.get("high_score", 0)
+        else:
+            self.save_settings()
 
 
     def save_settings(self):
