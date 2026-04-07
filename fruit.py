@@ -33,3 +33,11 @@ class Fruit:
         self.x = random.randint(0, CELL_NUMBER - 1)
         self.y = random.randint(0, CELL_NUMBER - 1)
         self.position = Vector2(self.x, self.y)
+
+
+    def reset(self):
+        self.randomize()
+
+
+    def clear(self):
+        self.position = None

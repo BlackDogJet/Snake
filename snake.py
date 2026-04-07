@@ -103,3 +103,34 @@ class Snake:
             self.tail = self.tail_right
         elif tail_relation == Vector2(1, 0):
             self.tail = self.tail_left
+
+
+    def reset(self):
+        self.clear()
+        self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
+        self.direction = Vector2(1, 0)
+
+    
+    def clear(self):
+        self.body = []
+        self.direction = Vector2(0, 0)
+
+
+    def update_snake_color(self, head_up, head_down, head_left, head_right,
+                          tail_up, tail_down, tail_left, tail_right,
+                          body_vertical, body_horizontal, body_bottom_left,
+                          body_bottom_right, body_top_left, body_top_right):
+        self.head_up = head_up
+        self.head_down = head_down
+        self.head_left = head_left
+        self.head_right = head_right
+        self.tail_up = tail_up
+        self.tail_down = tail_down
+        self.tail_left = tail_left
+        self.tail_right = tail_right
+        self.body_vertical = body_vertical
+        self.body_horizontal = body_horizontal
+        self.body_bottom_left = body_bottom_left
+        self.body_bottom_right = body_bottom_right
+        self.body_top_left = body_top_left
+        self.body_top_right = body_top_right

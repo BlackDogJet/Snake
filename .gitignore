@@ -1,6 +1,6 @@
 __pycache__/
 uv.lock
-save.json
+settings.json
 
 # Virtual environments
-.venv
+.venv/
