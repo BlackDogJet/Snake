@@ -5,6 +5,7 @@ it will grow in size making the maneuvering more difficult.
 
 ## Dependecies
 - Pygame
-- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Pygame.
+- Pygame-Menu
+- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Pygame and Pygame-Menu.
 
 

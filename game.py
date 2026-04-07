@@ -86,8 +86,6 @@ class Game(Settings):
         elif self.snake_color == SNAKE_PURPLE:
             snake_color_path = SNAKE_PURPLE_PATH
 
-        print(snake_color_path)
-
         # Snakes graphics
         self.head_up = pygame.image.load(os.path.join(snake_color_path, HEAD_UP_PATH)).convert_alpha()
         self.head_down = pygame.image.load(os.path.join(snake_color_path, HEAD_DOWN_PATH)).convert_alpha()
@@ -255,7 +253,7 @@ class Game(Settings):
         self.screen.blit(score_surface, score_rect)
 
         pygame.display.update()
-        pygame.time.delay(2000)
+        pygame.time.delay(3000)
 
         # Quit the game
         self.playing = False
