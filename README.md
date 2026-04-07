@@ -4,8 +4,6 @@ The object is to keep the snake from colliding with iteslf. As the snake eats fo
 it will grow in size making the maneuvering more difficult.
 
 ## Dependecies
-- Pygame
-- Pygame-Menu
-- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Pygame and Pygame-Menu.
-
-
+- Pygame or Pygame-ce
+- Pygame-Menu or Pygame-Menu-ce
+- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the dependecies.
